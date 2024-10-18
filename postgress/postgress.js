@@ -2,10 +2,12 @@ import { Sequelize } from "sequelize";
 import { createOrderModel } from "./model/orderSchema.js";
 import { createProductModel } from "./model/productModel.js";
 import { createUserModel } from "./model/userSchema.js";
+import dotenv from "dotenv";
+dotenv.config()
 
 
 export const sequelize = new Sequelize(
-  "postgresql://postgres:DNNnEpyFPZZvZPDGURtLEvRhIPyCfNXQ@junction.proxy.rlwy.net:52163/railway"
+  process.env.DATABASE_URL
 );
 
 let UserModel = null;
