@@ -26,6 +26,56 @@ const validateUser = (user) => {
 };
 
 const userController = {
+
+
+  showWelcome:async (req, res) => {
+    res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Our API</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f4;
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to Our API!</h1>
+        <p>This is a simple API that allows you to manage users and orders.</p>
+        <h2>Available Endpoints</h2>
+        <ul>
+            <li><strong>GET</strong> /getAll - Get all users</li>
+            <li><strong>POST</strong> /createEmployee - Create a new user</li>
+            <li><strong>GET</strong> /getById/:id - Get a user by ID</li>
+            <li><strong>PUT</strong> /update/user/:id - Update a user by ID</li>
+            <li><strong>DELETE</strong> /delete/user/:id - Delete a user by ID</li>
+            <li><strong>GET</strong> /orders/:empId - Get orders by employee ID</li>
+        </ul>
+        <p>For more information, please refer to the API documentation.</p>
+    </body>
+    </html>
+    `);
+},
+
   createUser: async (req, res, next) => {
     let userId = createUniqueId("user");
     const { name, email, designation } = req.body;

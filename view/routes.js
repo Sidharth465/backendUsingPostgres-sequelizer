@@ -6,6 +6,7 @@ import orderController from "../controller/orderController.js";
 
 const router = express.Router();
 // user
+router.get("/",userController.showWelcome)
 router.get("/getAll",userController.getAllUsers)
 router.post("/createEmployee",userController.createUser)
 router.post("/create/users/multiple",userController.createMultipleUser)
