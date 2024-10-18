@@ -2,6 +2,13 @@ import { Op, where } from "sequelize";
 import createUniqueId from "../constant.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import { sequelize, UserModel } from "../postgress/postgress.js";
+import fs from "fs"
+import path from "path";
+
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const validateUser = (user) => {
   const { name, email, designation } = user;
@@ -27,121 +34,21 @@ const validateUser = (user) => {
 
 const userController = {
   showWelcome: async (req, res) => {
-    res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Our Free Employee & Orders API</title>
-        <style>
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #282c34;
-                color: #ffffff;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
-            }
-            .content {
-                flex: 1; /* Allow the content to grow and fill the space */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                padding: 20px;
-            }
-            h1 {
-                font-size: 2.5em;
-                margin-bottom: 20px;
-                color: #AD49E1;
-                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            }
-            h2 {
-                font-size: 1.8em;
-                margin: 20px 0 10px;
-                color: #BB86FC;
-                border-bottom: 2px solid #BB86FC;
-                padding-bottom: 5px;
-            }
-            p {
-                font-size: 1.2em;
-                color: #e0e0e0;
-                margin-bottom: 20px;
-            }
-            ul {
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-                width: 100%;
-                max-width: 600px;
-                text-align: left;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                padding: 15px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            }
-            li {
-                margin: 10px 0;
-                padding: 10px;
-                border-radius: 5px;
-                transition: background 0.3s;
-            }
-            li:hover {
-                background: rgba(255, 255, 255, 0.2);
-            }
-            footer {
-                padding: 10px 0;
-                color: #b0b0b0;
-                border-top: 1px solid #444;
-                width: 100%;
-                text-align: center; /* Center the footer text */
-            }
-            pre {
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 5px;
-                padding: 10px;
-                margin: 10px 0;
-                overflow-x: auto;
-                font-size: 0.9em;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="content">
-            <h1>Welcome to Our API!</h1>
-            <p>This API allows you to manage users and orders with ease.</p>
-
-            <h2>User Management Endpoints</h2>
-            <ul>
-                <li><strong>GET</strong> /getAll - Get all employees</li>
-                <li><strong>POST</strong> /createEmployee - Create a new employee</li>
-                <pre>Request Body: { "name": "string", "email": "string", "designation": "string" }</pre>
-                <li><strong>GET</strong> /getById/:id - Get a user by ID</li>
-                <li><strong>PUT</strong> /update/employee/:id - Update an employee by ID</li>
-                <pre>Request Body: { "name": "string", "email": "string" }</pre>
-                <li><strong>DELETE</strong> /delete/employee/:id - Delete an employee by ID</li>
-            </ul>
-
-            <h2>Order Management Endpoints</h2>
-            <ul>
-                <li><strong>GET</strong> /orders/:empId - Get orders by employee ID</li>
-                <pre>Request Body: { "empId": "string" }</pre>
-                <p>Returns the orders associated with the specified employee ID.</p>
-            </ul>
-        </div>
-
-        <footer>
-            <p>&copy; 2024 Siddharth Verma</p>
-        </footer>
-    </body>
-    </html>
-    `);
-  },
-
+    try {
+      const filePath = path.join(__dirname, '../view/index.html'); // Adjusting the path
+      fs.readFile(filePath, 'utf-8', (err, data) => {
+          if (err) {
+              console.error("Error reading HTML file:", err);
+              return res.status(500).send('Error loading page');
+          }
+          res.send(data);
+      });
+  } catch (error) {
+      console.error("Internal server error:", error);
+      res.status(500).send('Internal server error');
+  }
+},
+   
 
 
 
