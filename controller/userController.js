@@ -26,55 +26,103 @@ const validateUser = (user) => {
 };
 
 const userController = {
-
-
-  showWelcome:async (req, res) => {
+  showWelcome: async (req, res) => {
     res.send(`
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Our API</title>
+        <title>Welcome to Our Free Employee & Orders API</title>
         <style>
+            /* Global styles */
             body {
                 font-family: Arial, sans-serif;
                 margin: 0;
-                padding: 20px;
-                background-color: #f4f4f4;
+                padding-horizontal: 20px;
+                background-color: #121212; 
+                color: #ffffff; 
+                display: flex; /* Use flexbox for centering */
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center items horizontally */
+                justify-content: center; /* Center items vertically */
+                height: 100vh; /* Full viewport height */
             }
+
+            /* Heading styles */
             h1 {
-                color: #333;
+                color: #AD49E1; /* Accent color for the main title */
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Elevated shadow */
             }
+            h2 {
+                color: #AD49E1; /* Accent color for subheadings */
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Elevated shadow for h2 */
+            }
+
+            /* Paragraph styles */
             p {
-                font-size: 1.2em;
+                font-size: 1.2em; /* Increased font size for readability */
+                color: #e0e0e0; /* Lighter text for paragraphs */
+                text-align: center; /* Center text in paragraphs */
             }
+
+            /* Link styles */
             a {
-                color: #007bff;
-                text-decoration: none;
+                color: #bb86fc; /* Light purple link color */
+                text-decoration: none; /* Remove underline from links */
             }
             a:hover {
-                text-decoration: underline;
+                text-decoration: underline; /* Underline on hover for better UX */
+            }
+
+            /* List styles */
+            ul {
+                list-style-type: none; /* Remove default list styles */
+                padding: 0; /* Remove padding */
+                text-align: center; /* Center align list items */
+            }
+            li {
+                margin: 8px 0; /* Add some space between list items */
+                color: #00BFFF; /* Glittery blue color */
+                font-weight: bold; /* Bold text for visibility */
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            }
+
+            /* Footer styles */
+            footer {
+                margin-top: 20px; /* Space above footer */
+                padding: 10px 0; /* Padding inside footer */
+                text-align: center; /* Center align text */
+                color: #b0b0b0; /* Lighter text color for footer */
+                border-top: 1px solid #444; /* Top border for separation */
             }
         </style>
     </head>
     <body>
         <h1>Welcome to Our API!</h1>
         <p>This is a simple API that allows you to manage users and orders.</p>
+
         <h2>Available Endpoints</h2>
         <ul>
-            <li><strong>GET</strong> /getAll - Get all users</li>
-            <li><strong>POST</strong> /createEmployee - Create a new user</li>
+            <li><strong>GET</strong> /getAll - Get all employees</li>
+            <li><strong>POST</strong> /createEmployee - Create a new employee</li>
             <li><strong>GET</strong> /getById/:id - Get a user by ID</li>
-            <li><strong>PUT</strong> /update/user/:id - Update a user by ID</li>
-            <li><strong>DELETE</strong> /delete/user/:id - Delete a user by ID</li>
+            <li><strong>PUT</strong> /update/employee/:id - Update an employee by ID</li>
+            <li><strong>DELETE</strong> /delete/employee/:id - Delete an employee by ID</li>
             <li><strong>GET</strong> /orders/:empId - Get orders by employee ID</li>
         </ul>
         <p>For more information, please refer to the API documentation.</p>
+
+        <footer>
+            <p>&copy; 2024 Siddharth Verma</p>
+        </footer>
     </body>
     </html>
     `);
 },
+
+
+
 
   createUser: async (req, res, next) => {
     let userId = createUniqueId("user");

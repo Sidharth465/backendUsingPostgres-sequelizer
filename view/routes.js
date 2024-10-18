@@ -9,10 +9,10 @@ const router = express.Router();
 router.get("/",userController.showWelcome)
 router.get("/getAll",userController.getAllUsers)
 router.post("/createEmployee",userController.createUser)
-router.post("/create/users/multiple",userController.createMultipleUser)
+router.post("/create/employee/multiple",userController.createMultipleUser)
 router.get("/getById/:id",userController.getUserById)
-router.put("/update/user/:id",userController.updateUser)
-router.delete("/delete/user/:id",userController.deleteUser)
+router.put("/update/employee/:id",userController.updateUser)
+router.delete("/delete/employee/:id",userController.deleteUser)
 
 // orders
 router.get('/orders/:empId',orderController.getOrdersByEmployee );
