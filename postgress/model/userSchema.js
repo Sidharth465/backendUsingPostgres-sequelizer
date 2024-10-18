@@ -21,7 +21,7 @@ export const createUserModel = async(sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },{timeStamps:true,
+  },{timestamps:true,
     createdAt: 'createdAt', 
     updatedAt: 'updatedAt', 
 
